@@ -4,7 +4,7 @@ import asyncio
 from dispatcher import dp, bot
 from handlers import *
 
-logging.baseConfig(level=logging.INFO)
+logging.basicConfig(level=logging.INFO)
 
 async def main():
     await dp.start_polling(bot)

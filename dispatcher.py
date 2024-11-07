@@ -4,7 +4,7 @@ from aiogram import Bot, Dispatcher
 from config import TOKEN
 from modules.check_subscription import CheckSubscriptionMiddleware
 
-logging.baseConfig(level=logging.INFO)
+logging.basicConfig(level=logging.INFO)
 
 bot = Bot(token=TOKEN)
 dp = Dispatcher()

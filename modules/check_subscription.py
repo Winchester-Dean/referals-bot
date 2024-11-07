@@ -19,8 +19,8 @@ class CheckSubscriptionMiddleware(BaseMiddleware):
 
         for chid in channels:
             try:
-                member = await msg.bot.get_chat_memebr(
-                    chid, msg.from_user.id
+                member = await msg.bot.get_chat_member(
+                    f"-100{chid[0]}", msg.from_user.id
                 )
 
                 if member.status == "left":
@@ -30,5 +30,5 @@ class CheckSubscriptionMiddleware(BaseMiddleware):
             except Exception as error:
                 logging.error(error)
         
-        return await handler(event, data)
+        return await handler(msg, data)
 

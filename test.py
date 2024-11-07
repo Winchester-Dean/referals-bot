@@ -1,6 +1,5 @@
 from database.db import DataBase
 
 database = DataBase()
-database.add_channel(
-    2399771704, "Best Vpns", "https://t.me/BestVpnsTeam"
-)
+for chid in database.get_channels_id():
+    print(chid[0])
