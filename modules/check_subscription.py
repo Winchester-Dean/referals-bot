@@ -2,7 +2,6 @@ import logging
 
 from aiogram.types import Message
 from aiogram import BaseMiddleware
-from aiogram.utils.exceptions import ChatNotFound, UserNotParticipant
 
 from database.db import DataBase
 
@@ -27,11 +26,5 @@ class CheckSubscriptionMiddleware(BaseMiddleware):
                     return await msg.answer(
                         "Пожалуйста подпишитесь на каналы!"
                     )
-        except UserNotParticipant:
-            return await msg.answer(
-                "Пожалуйста подпишитесь на каналы!"
-            )
-        except ChatNotFound as error:
-            logging.error(error)
         except Exception as error:
             logging.error(errot)

@@ -1,17 +1,13 @@
 import logging
 
-from config_reader import config
+from config import TOKEN
 from aiogram import Bot, Dispatcher
-from aiogram.contrib.fsm_storage.memory import MemoryStorage
 
 from modules.check_subscription import CheckSubscriptionMiddleware
 
 logging.basicConfig(level=logging.INFO)
-bot = Bot(
-    token=config.bot_token.get_secret_value()
-)
-storage = MemoryStorage()
-dp = Dispatcher(bot, storage=storage)
+bot = Bot(token=TOKEN)
+dp = Dispatcher(bot)
 
 dp.setup_middleware(CheckSubscriptionMiddleware())
 
