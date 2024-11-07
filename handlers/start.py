@@ -1,7 +1,10 @@
-from aiogram.types import Message
-from aiogram.filters import Command
-from dispatcher import dp
+import logging
 
+from dispacher import dp
+from aioram.types import Message
+from aioram.filters.command import Command
+
+logging.baseConfig(level=logging.INFO)
 
 @dp.message(Command("start"))
 async def start(msg: Message):

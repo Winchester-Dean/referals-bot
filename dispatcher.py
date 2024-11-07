@@ -1,14 +1,13 @@
 import logging
 
-from config import TOKEN
 from aiogram import Bot, Dispatcher
-
+from config import TOKEN
 from modules.check_subscription import CheckSubscriptionMiddleware
 
-logging.basicConfig(level=logging.INFO)
+logging.baseConfig(level=logging.INFO)
+
 bot = Bot(token=TOKEN)
-dp = Dispatcher(bot)
+dp = Dispatcher()
 
-dp.setup_middleware(CheckSubscriptionMiddleware())
-
-
+dp.message.outer_middleware(CheckSubscriptionMiddleware())
+dp.callback_query.outer_middleware(CheckSubscriptionMiddleware())
