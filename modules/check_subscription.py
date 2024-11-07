@@ -19,7 +19,7 @@ class CheckSubscriptionMiddleware(BaseMiddleware):
         try:
             for chid in channels_id:
                 member = await msg.bot.get_chat_member(
-                    chid, msg.from_user.id
+                    f"-100{chid}", msg.from_user.id
                 )
 
                 if member.status in ["left", "kicked"]:

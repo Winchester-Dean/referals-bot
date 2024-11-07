@@ -1,11 +1,9 @@
 import sqlite3
 
 class DataBase:
-    def __init__(
-        self,
-        directory: str = "database/database.db"
-    ):
-        self.connect = sqlite3.connect(directory)
+    def __init__(self):
+        self.directory: str = "database.db"
+        self.connect = sqlite3.connect(self.directory)
         self.cursor = self.connect.cursor()
 
         with self.connect:
@@ -23,7 +21,7 @@ class DataBase:
             self.cursor.execute("""
                 CREATE TABLE IF NOT EXISTS channels(
                     id INTEGER PRIMARY KEY,
-                    chid INTEGER NOT NULL
+                    chid INTEGER NOT NULL,
                     name TEXT NOT NULL,
                     link TEXT NOT NULL
                 )
@@ -50,7 +48,7 @@ class DataBase:
     ):
         with self.connect:
             self.cursor.execute(
-                "INSERT INTO users(chid, name, link) "
+                "INSERT INTO channels(chid, name, link) "
                 "VALUES(?, ?, ?)",
                 [chid, name, link]
             )
