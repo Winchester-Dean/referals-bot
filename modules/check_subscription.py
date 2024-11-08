@@ -7,14 +7,27 @@ from database.db import DataBase
 
 logging.basicConfig(level=logging.INFO)
 
+database = DataBase()
+
 class CheckSubscriptionMiddleware(BaseMiddleware):
+    async def add_user_db(
+        self,
+        user_id: int,
+        name: str
+    ):
+        users = database.get_users_id()
+        for user in users:
+            if user_id != user[0]:
+                database.add_user(
+                    user_id, name
+                )
+
     async def __call__(
         self,
         handler: Callable[[Message, Dict[str, Any]], Awaitable[Any]],
         msg: Message,
         data: Dict[str, Any]
     ) -> Any:
-        database = DataBase()
         channels = database.get_channels_id()
 
         for chid in channels:
@@ -30,5 +43,10 @@ class CheckSubscriptionMiddleware(BaseMiddleware):
             except Exception as error:
                 logging.error(error)
         
+        await self.add_user_db(
+            msg.from_user.id,
+            msg.from_user.first_name
+        )
+
         return await handler(msg, data)
 

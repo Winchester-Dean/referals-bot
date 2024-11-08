@@ -5,7 +5,7 @@ logging.basicConfig(level=logging.INFO)
 
 class DataBase:
     def __init__(self):
-        self.directory = "./database.db"
+        self.directory = "database/database.db"
         self.connect = sqlite3.connect(self.directory)
         self.cursor = self.connect.cursor()
 
@@ -13,7 +13,7 @@ class DataBase:
             self.cursor.execute("""
                 CREATE TABLE IF NOT EXISTS users(
                     id INTEGER PRIMARY KEY,
-                    user_id INTEGER NOT NULL,
+                    user_id INTEGER NOT NULL UNIQUE,
                     name TEXT NOT NULL,
                     referer INTEGER,
                     balance INTEGER DEFAULT 0
@@ -24,7 +24,7 @@ class DataBase:
             self.cursor.execute("""
                 CREATE TABLE IF NOT EXISTS channels(
                     id INTEGER PRIMARY KEY,
-                    chid INTEGER NOT NULL,
+                    chid INTEGER NOT NULL UNIQUE,
                     name TEXT NOT NULL,
                     link TEXT NOT NULL
                 )
